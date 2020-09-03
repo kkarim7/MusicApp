@@ -1,0 +1,30 @@
+.Main {
+  border: 2px solid black;
+  color: salmon;
+  width: 80%;
+  height: 350px;
+  margin: auto;
+  margin-top: 35px;
+  margin-bottom: 35px;
+  border-radius: 25px;
+}
+
+@media (max-width: 800px) {
+  .Main {
+    border: 2px solid black;
+    color: salmon;
+    width: 80%;
+    height: 200px;
+    margin: auto;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    border-radius: 25px;
+  }
+}
+
+.Background {
+  background-image: url("https://wallup.net/wp-content/uploads/2019/09/09/9209-minimalistic-music-typography-black-background.jpg");
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}

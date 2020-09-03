@@ -1,0 +1,48 @@
+.Modal {
+  height: 50%;
+  width: 70%;
+  left: 0;
+  top: 0;
+  position: fixed;
+  background-color: rgb(39, 39, 39);
+  color: salmon;
+  transition: transform 0.3s ease-out;
+  z-index: 1;
+  margin: 0 15%;
+  border-radius: 20px;
+}
+
+.ModalContent {
+  margin: auto;
+}
+
+.Open {
+  transform: translateY(20%);
+}
+
+.Close {
+  transform: translateY(-130%);
+}
+
+@media (max-width: 500px) {
+  .Modal {
+    height: 30%;
+    width: 80%;
+    left: 0;
+    top: -40px;
+    position: fixed;
+    background-color: rgb(54, 54, 54);
+    color: salmon;
+    transition: transform 0.3s ease-out;
+    z-index: 1;
+    margin: 22% 10%;
+  }
+
+  .Open {
+    transform: translateY(10%);
+  }
+
+  .Close {
+    transform: translateY(-130%);
+  }
+}

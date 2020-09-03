@@ -1,0 +1,33 @@
+.Toolbar {
+  height: 50px;
+  width: 100%;
+  color: salmon;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  z-index: 90;
+  background-color: grey;
+}
+
+.Toolbar li {
+  list-style: none;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.Toolbar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  height: 100%;
+}
+
+.Nav {
+  display: inline-flex;
+}

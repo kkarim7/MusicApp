@@ -1,0 +1,21 @@
+.Button {
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: rgba(0, 143, 153, 0.589);
+  padding: 5px;
+  margin: 10px;
+}
+
+.Button:hover {
+  background-color: rgba(0, 153, 38, 0.589);
+}
+
+.Signup {
+  background-color: green;
+}
+
+.Signin {
+  background-color: blue;
+}

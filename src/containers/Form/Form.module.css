@@ -1,0 +1,33 @@
+.Form {
+  display: inline-flex;
+  flex-flow: column;
+  margin: 10px;
+}
+
+.Input {
+  display: inline-flex;
+  flex-flow: column;
+  margin: 15px;
+}
+
+.Label {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 500px) {
+  .Form {
+    display: inline-flex;
+    flex-flow: column;
+    margin: 5px;
+  }
+
+  .Input {
+    display: inline-flex;
+    flex-flow: column;
+    margin: 10px;
+  }
+
+  .Label {
+    margin-bottom: 5px;
+  }
+}
