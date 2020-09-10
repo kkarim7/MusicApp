@@ -8,6 +8,7 @@ import Explore from "./components/Explore/Explore";
 import Library from "./components/Library/Library";
 import Profile from "./components/Profile/Profile";
 import Recent from "./components/Recent/Recent";
+import Auth from "./containers/Auth/Auth";
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
         <Route path="/profile" component={Profile} />
         <Route path="/explore" component={Explore} />
         <Route path="/library" component={Library} />
+        <Route path="/auth" component={Auth} />
         <Route path="/" exact component={Main} />
         <Redirect to="/" />
       </Switch>

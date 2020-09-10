@@ -4,8 +4,7 @@ import Aux from "../../hoc/Aux/Aux";
 import Button from "../../components/UI/Button/Button";
 
 import Modal from "../../components/UI/Modal/Modal";
-import SignUp from "../../components/SignUp/SignUp";
-import SignIn from "../../components/SignIn/SignIn";
+import Auth from "../Auth/Auth";
 
 class Main extends Component {
   state = {
@@ -36,7 +35,7 @@ class Main extends Component {
     return (
       <Aux>
         <Modal show={this.state.showModal} clicked={this.modalToggleHandler}>
-          {this.state.signUp ? <SignUp /> : <SignIn />}
+          {this.state.signUp ? <Auth signUp /> : <Auth />}
         </Modal>
         <div className={[classes.Main, classes.Background].join(" ")}>
           <h2>Music for you, by you</h2>

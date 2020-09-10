@@ -1,6 +1,5 @@
 .Modal {
-  height: 50%;
-  width: 70%;
+  width: 60%;
   left: 0;
   top: 0;
   position: fixed;
@@ -8,12 +7,13 @@
   color: salmon;
   transition: transform 0.3s ease-out;
   z-index: 1;
-  margin: 0 15%;
+  margin: 0 20%;
   border-radius: 20px;
 }
 
 .ModalContent {
   margin: auto;
+  margin-bottom: 25px;
 }
 
 .Open {
@@ -26,7 +26,6 @@
 
 @media (max-width: 500px) {
   .Modal {
-    height: 30%;
     width: 80%;
     left: 0;
     top: -40px;
@@ -36,6 +35,11 @@
     transition: transform 0.3s ease-out;
     z-index: 1;
     margin: 22% 10%;
+  }
+
+  .ModalContent {
+    margin: auto;
+    margin-bottom: 25px;
   }
 
   .Open {

@@ -1,6 +1,6 @@
 .Sidebar {
   height: 100%;
-  width: 15%;
+  width: 165px;
   position: fixed;
   list-style: none;
   z-index: 1;
@@ -15,7 +15,7 @@
 @media (max-width: 500px) {
   .Sidebar {
     height: 100%;
-    width: 40%;
+    width: 165px;
     position: fixed;
     z-index: 1;
     top: 0;
