@@ -12,6 +12,17 @@ const input = (props) => {
   }
 
   switch (props.elementType) {
+    case "file":
+      inputElement = (
+        <input
+          type="file"
+          className={inputClasses.join(" ")}
+          {...props.elementConfig}
+          value={props.value}
+          onChange={props.changed}
+        />
+      );
+      break;
     default:
       inputElement = (
         <input
