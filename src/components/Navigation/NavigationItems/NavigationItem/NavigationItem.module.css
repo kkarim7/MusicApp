@@ -15,12 +15,12 @@
 
 .NavigationItem a:hover {
   color: rgb(251, 193, 186);
+  border-bottom: 2px solid rgb(241, 69, 50);
 }
 
 .NavigationItem:active,
 .NavigationItem a.active {
   height: 100%;
-  border-bottom: 2px solid rgb(241, 69, 50);
   color: rgb(241, 69, 50);
 }
 

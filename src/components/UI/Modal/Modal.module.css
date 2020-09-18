@@ -1,18 +1,18 @@
 .Modal {
-  width: 60%;
+  width: 350px;
   left: 0;
   top: 0;
   position: fixed;
-  background-color: rgb(39, 39, 39);
+  background-color: rgb(54, 54, 54);
   color: salmon;
   transition: transform 0.3s ease-out;
   z-index: 1;
-  margin: 0 20%;
+  margin: 0 38%;
   border-radius: 20px;
 }
 
 .ModalContent {
-  margin: auto;
+  margin: auto 65px;
   margin-bottom: 25px;
 }
 
@@ -22,6 +22,60 @@
 
 .Close {
   transform: translateY(-130%);
+}
+
+@media (max-width: 1000px) {
+  .Modal {
+    width: 350px;
+    left: 0;
+    top: 0;
+    position: fixed;
+    background-color: rgb(54, 54, 54);
+    color: salmon;
+    transition: transform 0.3s ease-out;
+    z-index: 1;
+    margin: 0 34%;
+  }
+
+  .ModalContent {
+    margin: auto 65px;
+    margin-bottom: 25px;
+  }
+
+  .Open {
+    transform: translateY(20%);
+  }
+
+  .Close {
+    transform: translateY(-130%);
+  }
+}
+
+@media (max-width: 800px) {
+  .Modal {
+    width: 350px;
+    left: 0%;
+    top: 0;
+    position: fixed;
+    background-color: rgb(54, 54, 54);
+    color: salmon;
+    transition: transform 0.3s ease-out;
+    z-index: 1;
+    margin: 0 27%;
+  }
+
+  .ModalContent {
+    margin: auto 65px;
+    margin-bottom: 25px;
+  }
+
+  .Open {
+    transform: translateY(20%);
+  }
+
+  .Close {
+    transform: translateY(-130%);
+  }
 }
 
 @media (max-width: 500px) {

@@ -1,18 +1,21 @@
 import React from "react";
 import classes from "./Toolbar.module.css";
 
-import Menu from "./Menu/Menu";
-import NavigationItems from "../Navigation/NavigationItems/NavigationItems"
+import NavigationItems from "../Navigation/NavigationItems/NavigationItems";
 
 const toolbar = (props) => {
+  let navItems = [
+    <NavigationItems key="0" linkTo="/" click={props.logout}>
+      Home
+    </NavigationItems>,
+  ];
+
+  if (props.auth !== null) {
+    navItems.push();
+  }
   return (
     <header className={classes.Toolbar}>
-      <Menu click={props.openSidebar} />
-      <nav className={classes.Nav}>
-        <NavigationItems linkTo="/">Home</NavigationItems>
-        <NavigationItems linkTo="/explore">Explore</NavigationItems>
-        <NavigationItems linkTo="/library">Library</NavigationItems>
-      </nav>
+      <nav className={classes.Nav}>{navItems}</nav>
     </header>
   );
 };
