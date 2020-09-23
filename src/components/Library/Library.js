@@ -12,7 +12,7 @@ import { checkValidity } from "../../shared/utility";
 
 class Library extends Component {
   state = {
-    songs: [{}],
+    songs: [],
     controls: {
       artist: {
         elementType: "input",
@@ -70,11 +70,19 @@ class Library extends Component {
   };
 
   componentDidMount = () => {
+    const queryParams = "?auth=" + this.props.token;
     axios
-      .get("ENTER DB PATH HERE")
+      .get(
+        "DB LIBRARY" +
+          queryParams
+      )
       .then((response) => {
-        this.setState({ songs: response.data });
-        console.log(this.loop(response));
+        const fetchedSongs = [];
+        for (let key in response.data) {
+          fetchedSongs.push({ ...response.data[key], id: key });
+        }
+        this.setState({ songs: fetchedSongs });
+        console.log(fetchedSongs);
       })
       .catch((error) => {
         console.log(error);
@@ -103,15 +111,6 @@ class Library extends Component {
     }));
   };
 
-  loop = (res) => {
-    for (let item in res.data) {
-      console.log(item);
-      for (let moreInfo of item) {
-        console.log(moreInfo);
-      }
-    }
-  };
-
   onSubmitHandler = (event) => {
     event.preventDefault();
 
@@ -124,14 +123,59 @@ class Library extends Component {
     this.setState({ load: true });
 
     axios
-       .post( "ENTER DB PATH HERE" , post)
+      .post("DB LIBRARY", post)
       .then((response) => {
         console.log("POST SENT");
-        this.setState({ load: false });
+        this.componentDidMount();
+        this.setState({
+          load: false,
+          modal: false,
+          controls: {
+            artist: {
+              elementType: "input",
+              elementConfig: {
+                type: "input",
+                placeholder: "Artist",
+              },
+              value: "",
+              validation: {
+                required: true,
+              },
+              valid: false,
+              touched: false,
+            },
+            album: {
+              elementType: "input",
+              elementConfig: {
+                type: "input",
+                placeholder: "Album",
+              },
+              value: "",
+              validation: {
+                required: true,
+              },
+              valid: false,
+              touched: false,
+            },
+            song: {
+              elementType: "input",
+              elementConfig: {
+                type: "input",
+                placeholder: "Song",
+              },
+              value: "",
+              validation: {
+                required: true,
+              },
+              valid: false,
+              touched: false,
+            },
+          },
+        });
       })
       .catch((error) => {
         console.log(error);
-        this.setState({ load: false });
+        this.setState({ load: false, modal: false });
       });
   };
 
@@ -162,18 +206,21 @@ class Library extends Component {
       form = <Load />;
     }
 
-    // let uploads = <Load />;
+    let content = (
+      <div>
+        <h4>Please add some songs</h4>
+      </div>
+    );
 
-    // if (!this.state.load) {
-    //   uploads = this.state.songs.map((upload) => (
-    //     <div className={classes.Pill}>
-    //       <h3>Artist: {upload.artist}</h3>
-    //       <h3>Album: {upload.album}</h3>
-    //       <h3>Song: {upload.song}</h3>
-    //     </div>
-    //   ));
-    //   console.log(uploads);
-    // }
+    if (this.state.songs) {
+      content = this.state.songs.map((song) => (
+        <div className={classes.Pill} key={song.id}>
+          <h4>Artist: {song.artist}</h4>
+          <h4>Album: {song.album}</h4>
+          <h4>Song: {song.song}</h4>
+        </div>
+      ));
+    }
 
     return (
       <Aux>
@@ -181,20 +228,10 @@ class Library extends Component {
         <Modal show={this.state.modal} clicked={this.modalToggleHandler}>
           <form onSubmit={this.onSubmitHandler}>
             {form}
-            <Button>UPLOAD</Button>
+            {this.state.load ? null : <Button>UPLOAD</Button>}
           </form>
         </Modal>
-        <div>
-          {this.state.songs ? (
-            <div className={classes.Pill}>
-              {/* <h4>Artist: {this.state.songs.artist}</h4>
-              <h4>Album: {this.state.songs.album}</h4>
-              <h4>Song: {this.state.songs.song}</h4> */}
-            </div>
-          ) : (
-            <Load />
-          )}
-        </div>
+        <div>{content}</div>
         <Button circle clicked={this.modalToggleHandler}>
           +
         </Button>

@@ -125,7 +125,7 @@ class Main extends Component {
       password: password,
       returnSecureToken: true,
     };
-    const API_key = "ENTER API KEY HERE";
+    const API_key = "ENTER API KEY";
     let url =
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" +
       API_key;
@@ -241,7 +241,7 @@ class Main extends Component {
               <Button clicked={this.logout}>Logout</Button>
               <Button clicked={this.modalToggleHandler}>Cancel</Button>
             </Modal>
-            <Library />
+            <Library token={this.state.token} />
             <Button clicked={() => this.modalToggleHandler()}>Logout</Button>
           </div>
         ) : (
