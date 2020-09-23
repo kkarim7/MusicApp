@@ -4,7 +4,7 @@
   top: 0;
   position: fixed;
   background-color: rgb(54, 54, 54);
-  color: salmon;
+  color: #B68FA2;
   transition: transform 0.3s ease-out;
   z-index: 1;
   margin: 0 38%;
@@ -21,7 +21,7 @@
 }
 
 .Close {
-  transform: translateY(-130%);
+  transform: translateY(-100%);
 }
 
 @media (max-width: 1000px) {
@@ -31,7 +31,7 @@
     top: 0;
     position: fixed;
     background-color: rgb(54, 54, 54);
-    color: salmon;
+    color: #B68FA2;
     transition: transform 0.3s ease-out;
     z-index: 1;
     margin: 0 34%;
@@ -47,7 +47,7 @@
   }
 
   .Close {
-    transform: translateY(-130%);
+    transform: translateY(-100%);
   }
 }
 
@@ -58,7 +58,7 @@
     top: 0;
     position: fixed;
     background-color: rgb(54, 54, 54);
-    color: salmon;
+    color: #B68FA2;
     transition: transform 0.3s ease-out;
     z-index: 1;
     margin: 0 27%;
@@ -74,7 +74,7 @@
   }
 
   .Close {
-    transform: translateY(-130%);
+    transform: translateY(-110%);
   }
 }
 
@@ -85,7 +85,7 @@
     top: -40px;
     position: fixed;
     background-color: rgb(54, 54, 54);
-    color: salmon;
+    color: #B68FA2;
     transition: transform 0.3s ease-out;
     z-index: 1;
     margin: 22% 10%;
@@ -97,10 +97,10 @@
   }
 
   .Open {
-    transform: translateY(10%);
+    transform: translateY(20%);
   }
 
   .Close {
-    transform: translateY(-130%);
+    transform: translateY(-150%);
   }
 }

@@ -16,6 +16,7 @@ const input = (props) => {
       inputElement = (
         <input
           type="file"
+          accept=".mp3, .mp4"
           className={inputClasses.join(" ")}
           {...props.elementConfig}
           value={props.value}

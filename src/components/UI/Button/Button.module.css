@@ -3,19 +3,50 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: rgba(0, 143, 153, 0.589);
+  background-color: #B68FA2;
+  box-shadow: 2px 2px 1px grey;
   padding: 5px;
   margin: 10px;
 }
 
+.ButtonCircle {
+  height: 2em;
+  width: 2em;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #aa79c7;
+  transform-origin: bottom;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  box-shadow: 2px 2px 1px rgba(243, 106, 14, 0.233);
+  padding: 5px;
+  margin: 45px;
+}
+
+.ButtonCircle:hover {
+  background-color: #a268c3;
+  animation-name: bounce;
+  animation-timing-function: linear;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .Button:hover {
-  background-color: rgba(0, 153, 38, 0.589);
-}
-
-.Signup {
-  background-color: green;
-}
-
-.Signin {
-  background-color: blue;
+  background-color: #975072;
 }

@@ -1,0 +1,13 @@
+.Library {
+  color: #b68fa2;
+}
+
+.Pill {
+  display: flex;
+  justify-content: space-evenly;
+  color: #b67997;
+  background-color: #586f77;
+  margin: 20px;
+  border: 2px solid black;
+  border-radius: 100px;
+}

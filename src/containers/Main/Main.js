@@ -9,6 +9,8 @@ import Modal from "../../components/UI/Modal/Modal";
 import Load from "../../components/UI/Load/Load";
 import Input from "../../components/UI/Input/Input";
 import Layout from "../../components/Layout/Layout";
+import Library from "../../components/Library/Library";
+import {checkValidity} from "../../shared/utility";
 
 class Main extends Component {
   state = {
@@ -71,39 +73,13 @@ class Main extends Component {
   // };
 
   // ***AUTH STARTS***
-  checkValidity(value, rules) {
-    let isValid = true;
-    if (!rules) {
-      return true;
-    }
-
-    if (rules.required) {
-      isValid = value.trim() !== "" && isValid;
-    }
-
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
-
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    }
-
-    if (rules.isEmail) {
-      const pattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-      isValid = pattern.test(value) && isValid;
-    }
-
-    return isValid;
-  }
-
   inputChangedHandler = (event, controlName) => {
     const updatedControls = {
       ...this.state.controls,
       [controlName]: {
         ...this.state.controls[controlName],
         value: event.target.value,
-        valid: this.checkValidity(
+        valid: checkValidity(
           event.target.value,
           this.state.controls[controlName].validation
         ),
@@ -149,7 +125,7 @@ class Main extends Component {
       password: password,
       returnSecureToken: true,
     };
-    const API_key = "ENTER YOUR API KEY HERE";
+    const API_key = "ENTER API KEY HERE";
     let url =
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" +
       API_key;
@@ -265,7 +241,7 @@ class Main extends Component {
               <Button clicked={this.logout}>Logout</Button>
               <Button clicked={this.modalToggleHandler}>Cancel</Button>
             </Modal>
-            <h1>Music Library</h1>
+            <Library />
             <Button clicked={() => this.modalToggleHandler()}>Logout</Button>
           </div>
         ) : (
