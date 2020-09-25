@@ -10,7 +10,7 @@ import Load from "../../components/UI/Load/Load";
 import Input from "../../components/UI/Input/Input";
 import Layout from "../../components/Layout/Layout";
 import Library from "../../components/Library/Library";
-import {checkValidity} from "../../shared/utility";
+import { checkValidity } from "../../shared/utility";
 
 class Main extends Component {
   state = {

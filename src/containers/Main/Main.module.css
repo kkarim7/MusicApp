@@ -1,6 +1,6 @@
 .Main {
   border: 2px solid black;
-  color: #B68FA2;
+  color: #b68fa2;
   width: 80%;
   height: 350px;
   margin: auto;
@@ -12,7 +12,7 @@
 @media (max-width: 800px) {
   .Main {
     border: 2px solid black;
-    color: #B68FA2;
+    color: #b68fa2;
     width: 80%;
     height: 200px;
     margin: auto;
@@ -27,4 +27,18 @@
   background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;
+}
+
+.Pill {
+  display: flex;
+  justify-content: space-evenly;
+  color: #b67997;
+  background-color: #586f77;
+  margin: 20px;
+  border: 2px solid black;
+  border-radius: 100px;
+}
+
+.PillContainer {
+  margin: 10px;
 }

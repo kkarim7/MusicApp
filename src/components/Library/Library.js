@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import firebase from "firebase";
+import FileUploader from "react-firebase-file-uploader";
 
 import classes from "./Library.module.css";
 
@@ -53,27 +55,17 @@ class Library extends Component {
         valid: false,
         touched: false,
       },
-      // upload: {
-      //   elementType: "file",
-      //   elementConfig: {
-      //     type: "file",
-      //   },
-      //   value: "",
-      //   validation: {
-      //     required: true,
-      //   },
-      //   valid: false,
-      // },
     },
     modal: false,
     load: false,
+    songURL: "",
   };
 
   componentDidMount = () => {
     const queryParams = "?auth=" + this.props.token;
     axios
       .get(
-        "DB LIBRARY" +
+        "DB URL" +
           queryParams
       )
       .then((response) => {
@@ -111,6 +103,31 @@ class Library extends Component {
     }));
   };
 
+  handleStartUpload = () => {
+    this.setState({ load: true });
+    console.log("Upload Started");
+  };
+
+  handleSuccessUpload = (filename) => {
+    this.setState({ load: false });
+    firebase
+      .storage()
+      .ref()
+      .child(filename)
+      .getDownloadURL()
+      .then((url) => {
+        this.setState({
+          songURL: url,
+        });
+      });
+    console.log("Upload success");
+  };
+
+  handleUploadError = (error) => {
+    this.setState({ load: false });
+    console.log(error);
+  };
+
   onSubmitHandler = (event) => {
     event.preventDefault();
 
@@ -118,12 +135,13 @@ class Library extends Component {
       artist: this.state.controls.artist.value,
       album: this.state.controls.album.value,
       song: this.state.controls.song.value,
+      songURL: this.state.songURL,
     };
 
     this.setState({ load: true });
 
     axios
-      .post("DB LIBRARY", post)
+      .post("DB URL", post)
       .then((response) => {
         console.log("POST SENT");
         this.componentDidMount();
@@ -169,8 +187,10 @@ class Library extends Component {
               },
               valid: false,
               touched: false,
+              songURL: "",
             },
           },
+          songURL: "",
         });
       })
       .catch((error) => {
@@ -215,6 +235,7 @@ class Library extends Component {
     if (this.state.songs) {
       content = this.state.songs.map((song) => (
         <div className={classes.Pill} key={song.id}>
+          <audio controls src={song.songURL}></audio>
           <h4>Artist: {song.artist}</h4>
           <h4>Album: {song.album}</h4>
           <h4>Song: {song.song}</h4>
@@ -228,7 +249,14 @@ class Library extends Component {
         <Modal show={this.state.modal} clicked={this.modalToggleHandler}>
           <form onSubmit={this.onSubmitHandler}>
             {form}
-            {this.state.load ? null : <Button>UPLOAD</Button>}
+            <FileUploader
+              accept=".mp3, .mp4"
+              storageRef={firebase.storage().ref()}
+              onUploadStart={this.handleStartUpload}
+              onUploadSuccess={this.handleSuccessUpload}
+              onUploadError={this.handleUploadError}
+            />
+            {this.state.load ? <h4>UPLOADING</h4> : <Button>UPLOAD</Button>}
           </form>
         </Modal>
         <div>{content}</div>
