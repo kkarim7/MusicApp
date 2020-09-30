@@ -5,13 +5,20 @@ import NavigationItems from "../Navigation/NavigationItems/NavigationItems";
 
 const toolbar = (props) => {
   let navItems = [
-    <NavigationItems key="0" linkTo="/" click={props.logout}>
+    <NavigationItems key="home" linkTo="/">
       Home
     </NavigationItems>,
   ];
 
   if (props.auth !== null) {
-    navItems.push();
+    navItems = [
+      <NavigationItems key="library" linkTo="/library">
+        Library
+      </NavigationItems>,
+      <NavigationItems key="profile" linkTo="/profile">
+        Profile
+      </NavigationItems>,
+    ];
   }
   return (
     <header className={classes.Toolbar}>

@@ -13,7 +13,7 @@
   padding: 15px 18px;
 }
 
-.NavigationItem a:hover {
+.NavigationItem a:hover, .NavigationItem a.active:hover {
   color: #975072;
   border-bottom: 2px solid #975072;
 }
@@ -21,7 +21,7 @@
 .NavigationItem:active,
 .NavigationItem a.active {
   height: 100%;
-  color: #B68FA2;;
+  border-bottom: 2px solid #B68FA2;
 }
 
 .SidebarNavigationItem {

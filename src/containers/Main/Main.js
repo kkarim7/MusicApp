@@ -9,8 +9,8 @@ import Modal from "../../components/UI/Modal/Modal";
 import Load from "../../components/UI/Load/Load";
 import Input from "../../components/UI/Input/Input";
 import Layout from "../../components/Layout/Layout";
-import Library from "../../components/Library/Library";
 import { checkValidity } from "../../shared/utility";
+import { Redirect } from "react-router-dom";
 
 class Main extends Component {
   state = {
@@ -53,7 +53,6 @@ class Main extends Component {
   };
 
   modalToggleHandler = () => {
-    // this.setState({ showModal: true });
     this.setState((prevState) => ({
       showModal: !prevState.showModal,
       error: null,
@@ -67,10 +66,6 @@ class Main extends Component {
   signInHandler = () => {
     this.setState({ signUp: false });
   };
-
-  // modalCloseHandler = () => {
-  //   this.setState({ showModal: false });
-  // };
 
   // ***AUTH STARTS***
   inputChangedHandler = (event, controlName) => {
@@ -89,19 +84,23 @@ class Main extends Component {
     this.setState({ controls: updatedControls });
   };
 
-  authSuccess = (idToken, userId) => {
+  authSuccess = (idToken, userId, expiration) => {
+    const expirationDate = new Date(new Date().getTime() + expiration * 1000);
     this.setState({
       load: false,
       token: idToken,
       userId: userId,
     });
+    localStorage.setItem("token", idToken);
+    localStorage.setItem("expirationDate", expirationDate);
+    localStorage.setItem("userId", userId);
     console.log("AUTH SUCCESS");
   };
 
   authFail = (error) => {
     this.setState({
       load: false,
-      error: error.message,
+      error: error,
     });
   };
 
@@ -111,6 +110,7 @@ class Main extends Component {
       userId: null,
     });
     console.log("AUTH LOGOUT");
+    return <Redirect to="/" />;
   };
 
   checkAuthTimeout = (expireTime) => {
@@ -137,11 +137,15 @@ class Main extends Component {
     axios
       .post(url, authData)
       .then((response) => {
-        this.authSuccess(response.data.idToken, response.data.localId);
+        this.authSuccess(
+          response.data.idToken,
+          response.data.localId,
+          response.data.expiresIn
+        );
         this.checkAuthTimeout(response.data.expiresIn);
       })
       .catch((error) => {
-        this.authFail(error.response.data.error);
+        this.authFail(error.response.data.error.message);
       });
   };
 
@@ -187,7 +191,6 @@ class Main extends Component {
       error: null,
     });
   };
-
   // *** AUTH END ***
 
   render() {
@@ -223,27 +226,10 @@ class Main extends Component {
       errorMessage = <p>{this.state.error}</p>;
     }
 
-    if (this.state.redirect) {
-      return;
-    }
-
     return (
       <Aux>
         {this.state.token ? (
-          <div>
-            <Layout />
-            <Modal
-              show={!this.state.showModal}
-              clicked={this.modalToggleHandler}
-            >
-              <h4>LOGOUT</h4>
-              <p>Are you sure you want to Logout?</p>
-              <Button clicked={this.logout}>Logout</Button>
-              <Button clicked={this.modalToggleHandler}>Cancel</Button>
-            </Modal>
-            <Library token={this.state.token} />
-            <Button clicked={() => this.modalToggleHandler()}>Logout</Button>
-          </div>
+          <Redirect to="/library" />
         ) : (
           <Aux>
             <Layout auth={this.state.token} />

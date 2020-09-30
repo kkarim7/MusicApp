@@ -11,6 +11,7 @@ import Load from "../UI/Load/Load";
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
 import { checkValidity } from "../../shared/utility";
+import Layout from "../Layout/Layout";
 
 class Library extends Component {
   state = {
@@ -62,23 +63,31 @@ class Library extends Component {
   };
 
   componentDidMount = () => {
-    const queryParams = "?auth=" + this.props.token;
-    axios
-      .get(
-        "DB URL" +
-          queryParams
-      )
-      .then((response) => {
-        const fetchedSongs = [];
-        for (let key in response.data) {
-          fetchedSongs.push({ ...response.data[key], id: key });
-        }
-        this.setState({ songs: fetchedSongs });
-        console.log(fetchedSongs);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    setTimeout(() => {
+      const queryParams = "?auth=" + localStorage.getItem("token");
+      axios
+        .get(
+          "ENTER DB PATH" +
+            queryParams
+        )
+        .then((response) => {
+          const fetchedSongs = [];
+          for (let key in response.data) {
+            fetchedSongs.push({ ...response.data[key], id: key });
+          }
+          this.setState({ songs: fetchedSongs });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, 10);
+  };
+
+  logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("expirationDate");
+    console.log("AUTH LOGOUT");
   };
 
   inputChangedHandler = (event, controlName) => {
@@ -136,12 +145,17 @@ class Library extends Component {
       album: this.state.controls.album.value,
       song: this.state.controls.song.value,
       songURL: this.state.songURL,
+      userId: localStorage.getItem("userId"),
     };
 
     this.setState({ load: true });
 
     axios
-      .post("DB URL", post)
+      .post(
+        "ENTER DB PATH" +
+          localStorage.getItem("token"),
+        post
+      )
       .then((response) => {
         console.log("POST SENT");
         this.componentDidMount();
@@ -235,7 +249,7 @@ class Library extends Component {
     if (this.state.songs) {
       content = this.state.songs.map((song) => (
         <div className={classes.Pill} key={song.id}>
-          <audio controls src={song.songURL}></audio>
+          <audio title={song.song} controls src={song.songURL}></audio>
           <h4>Artist: {song.artist}</h4>
           <h4>Album: {song.album}</h4>
           <h4>Song: {song.song}</h4>
@@ -245,6 +259,7 @@ class Library extends Component {
 
     return (
       <Aux>
+        <Layout />
         <h1 className={classes.Library}>Music Library</h1>
         <Modal show={this.state.modal} clicked={this.modalToggleHandler}>
           <form onSubmit={this.onSubmitHandler}>
@@ -259,7 +274,7 @@ class Library extends Component {
             {this.state.load ? <h4>UPLOADING</h4> : <Button>UPLOAD</Button>}
           </form>
         </Modal>
-        <div>{content}</div>
+        {localStorage.getItem("token") ? <div>{content}</div> : <Load />}
         <Button circle clicked={this.modalToggleHandler}>
           +
         </Button>

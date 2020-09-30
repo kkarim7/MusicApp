@@ -1,0 +1,35 @@
+.Profile {
+  color: #b68fa2;
+}
+
+.ProfilePic {
+  margin-top: 20px;
+  width: 100px;
+  height: 100px;
+}
+
+.Profile a {
+  color: #b68fa2;
+}
+
+.Profile a:hover {
+  color: #975072;
+}
+
+.Logout {
+  margin-top: 50px;
+}
+
+.Pill {
+  display: flex;
+  justify-content: space-evenly;
+  color: #b67997;
+  background-color: #586f77;
+  margin: 20px;
+  border: 2px solid black;
+  border-radius: 100px;
+}
+
+.LogoutModal {
+  display: inline-flex;
+}
