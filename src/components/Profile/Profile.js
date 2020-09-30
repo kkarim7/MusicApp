@@ -21,7 +21,7 @@ class Profile extends Component {
     const queryParams = "?auth=" + localStorage.getItem("token");
     axios
       .get(
-        "https://music-to-go-app.firebaseio.com/library/songs.json" +
+        "ENTER DB PATH" +
           queryParams
       )
       .then((res) => {
