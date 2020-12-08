@@ -1,5 +1,5 @@
 # Music App
-Add music to Firebase Storage and access it via Firebase RealTime DataBase. 
+Add music to Firebase RealTime DataBase/Storage and access it to listen to later. 
 
 # Features
 
